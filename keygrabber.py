@@ -1,9 +1,9 @@
 import keyboard
 
-output_file = "tastenprotokoll.txt"
+output_file = "KeyRecorder.txt"
 
 with open(output_file, "a") as file:
-print("Drücke 'Esc', um die Aufnahme zu beenden.")
+print("Press 'Esc', to stop Recording!")
 
 while True:
 try:
