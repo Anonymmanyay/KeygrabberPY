@@ -1,0 +1,5 @@
+Just start the Script in Python and stop it with 'ESC'
+the output file is in the same folder as the script also
+'/download/keygrabber-master/KeyRecord.txt' or where
+somewhere else the Script is.
+THX
