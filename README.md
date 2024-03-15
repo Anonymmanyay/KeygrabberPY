@@ -1,6 +1,8 @@
 # KeygrabberPY
 This Python Script Record your Keys ans save it as an .txt file
 
+DOWNLOAD: https://github.com/BraucheeinPsychologe/KeygrabberPY/releases
+
 PIP`s needed: Keyboard
 
 The help texts are in  🇩🇪 German 🇩🇪 , but everyone that can use an Browser, should be able to translate the text...
