@@ -1,32 +1,40 @@
 import keyboard
+import os
 
-output_file = "KeyRecorder.txt"
+# Ensure that the output file is created in a safe location
+output_dir = os.path.expanduser("~/Desktop")
+output_file = os.path.join(output_dir, "KeyRecorder.txt")
 
 with open(output_file, "a") as file:
-print("Press 'Esc', to stop Recording!")
+    print(f"Press 'Esc', to stop Recording!")
 
-while True:
-try:
-# Warte auf einen Tastendruck
-key_event = keyboard.read_event()
+    while True:
+        try:
+            # Wait for a key press event
+            key_event = keyboard.read_event(timeout=0.1)
 
-# Überprüfe, ob es ein Tasten-Druck-Ereignis ist
-if key_event.event_type == keyboard.KEY_DOWN:
-pressed_key = key_event.name
+            # Check if it is a key press event
+            if key_event.event_type == keyboard.KEY_DOWN:
+                # Get the name of the pressed key
+                pressed_key = key_event.name
 
-# Spezielle Behandlung für Leertaste
-if pressed_key == "space":
-pressed_key = " "
+                # Special handling for space key
+                if pressed_key == "space":
+                    pressed_key = " "
 
-# Schreibe den gedrückten Schlüssel in die Datei
-file.write(pressed_key + "\n")
-file.flush() # Sofortiges Schreiben sicherstellen
+                # Write the pressed key to the file
+                file.write(pressed_key + "\n")
+                file.flush()  # Ensure immediate writing
 
-# Überprüfe, ob die Escape-Taste gedrückt wurde
-if pressed_key == "esc":
-print("Aufnahme beendet.")
-break
+                # Check if the escape key was pressed
+                if pressed_key == "esc":
+                    print("Recording stopped.")
+                    break
 
-except KeyboardInterrupt:
-# Breche die Schleife ab, wenn der Benutzer Strg+C drückt
-break
+            # Ignore unsupported keys
+        except KeyError:
+            continue
+
+        # Exit the loop if the user presses Ctrl+C
+        except KeyboardInterrupt:
+            break
